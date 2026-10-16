@@ -210,10 +210,10 @@ h1, h2, h3, h4, h5 {
 .bagian-info { 
   background: #f0e6d8; 
 }
-.bagian-info .nav-tabs { 
+.bagian-info { 
   border-color: #d9c7b2; 
 }
-.bagian-info .nav-link { 
+.bagian-info  { 
   color: #765d48; 
   border-radius: 10px 10px 0 0; 
 }
@@ -223,15 +223,69 @@ h1, h2, h3, h4, h5 {
   background: var(--krim); 
   border-color: #d9c7b2 #d9c7b2 var(--krim); 
 }
-.bagian-info .tab-content { 
+.bagian-info  { 
   padding: 24px; 
   background: var(--krim); 
   border-radius: 0 0 14px 14px; 
 }
-.bagian-info .accordion-button:not(.collapsed) { 
+.bagian-info { 
   color: var(--kopi-gelap); 
   background: #f4e8d6; 
   box-shadow: none; 
+}
+/* kartu info */
+.kartu-info {
+  height: 100%;
+  padding: 24px;
+  background: var(--putih);
+  border: 1px solid #71513714;
+  border-radius: 18px;
+  box-shadow: 0 5px 18px #3823190e;
+  transition: 0.25s;
+}
+.kartu-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px #3823191f;
+}
+.kartu-info h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--kopi-gelap);
+}
+.ikon-bulat {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  background: var(--emas);
+  color: var(--kopi-gelap);
+}
+.info-kunjungan {
+  background: var(--kopi-sedang);
+  color: #fffaf3;
+}
+.info-kunjungan .judul-seksi {
+  color: #fffaf3;
+}
+.info-sub {
+  color: #e1cfba;
+}
+.baris-jam {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.9rem;
+}
+.baris-jam.aktif {
+  color: var(--kopi-gelap);
+  font-weight: 600;
 }
 
 /* TENTANG KAMI */
@@ -243,27 +297,6 @@ h1, h2, h3, h4, h5 {
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 14px 30px #3823191f;
-}
-.nilai-kartu {
-  height: 100%;
-  padding: 22px;
-  background: var(--putih);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-}
-.nilai-ikon {
-  font-size: 1.6rem;
-  color: var(--kopi-caramel);
-  margin-bottom: 10px;
-}
-.nilai-kartu h3 {
-  font-size: 1.05rem;
-  color: var(--kopi-gelap);
-}
-.nilai-kartu p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--teks-redup);
 }
 
 /* MODAL & KERANJANG */

@@ -1,7 +1,7 @@
 "use client";
 
 import Stepper from "../components/stepper"; 
-import { rupiah, type Item, type Menu } from "../lib/helpers";
+import { kontak, rupiah, type Item, type Menu } from "../lib/helpers";
 import TentangKami from "../components/tentang";
 import Keranjang from "../components/keranjang";
 
@@ -35,7 +35,6 @@ import {
   CheckCircleFill,
   Dash,
   GeoAltFill,
-  Instagram,
   Plus,
   TelephoneFill,
 } from "react-bootstrap-icons";
@@ -464,10 +463,9 @@ export default function Home() {
             © 2026 Kopi Nusantara · {NAMA} ({NIM})
           </span>
           <span>
-            <GeoAltFill className="me-1" /> Jl. Kopi No. 1
-            <TelephoneFill className="ms-3 me-1" /> 0812-3456-7890
-            <Instagram className="ms-3 me-1" /> @kopinusantara
-          </span>
+          <GeoAltFill className="me-1" /> {kontak.alamat}
+          <TelephoneFill className="ms-3 me-1" /> {kontak.wa}
+        </span>
         </Container>
       </footer>
 
