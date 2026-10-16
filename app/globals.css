@@ -8,6 +8,7 @@
   --teks-redup: #817468;
   --putih: #fffdf9;
   --border: #eee4d7;
+  --bs-body-font-family: var(--font-body), system-ui, sans-serif;
 }
 
 html { 
@@ -20,8 +21,8 @@ body {
   color: var(--teks); 
   line-height: 1.6; 
 }
-h1, h2, h3, .brand, .offcanvas-title { 
-  font-family: var(--font-judul), Georgia, serif; 
+h1, h2, h3, h4, h5 { 
+  font-weight: 600; 
 }
 
 /* NAVBAR */
@@ -54,7 +55,7 @@ h1, h2, h3, .brand, .offcanvas-title {
   border-color: #f0dfbd; 
   color: #73512d; 
   border-radius: 12px; 
-  font-size: 0.9rem; 
+  font-size: 14px; 
 }
 .intro {
   padding: 40px; 
@@ -63,20 +64,20 @@ h1, h2, h3, .brand, .offcanvas-title {
     linear-gradient(135deg, var(--kopi-gelap), var(--kopi-sedang));
 }
 .intro-judul { 
-  font-size: 30px; 
+  font-size: 20px; 
   line-height: 1.2; 
-  font-weight: 400; 
+  font-weight: 600; 
   margin-bottom: 12px; 
 }
 .intro-nim { 
-  font-size: 0.95rem; 
+  font-size: 15px; 
   color: #e7bc72; 
   margin: 0; 
 }
 
 /* CAROUSEL */
 .gambar-hero { 
-  height: clamp(240px, 38vw, 460px); 
+  height: 350px; 
   object-fit: cover; 
   filter: brightness(0.78); 
 }
@@ -87,22 +88,22 @@ h1, h2, h3, .brand, .offcanvas-title {
   padding: 22px; 
   border-radius: 18px;
   background: linear-gradient(135deg, #2d1d14db, #2d1d148c);
-  border: 1px solid rgba(255, 255, 255, 0.15); 
+  border: 1px solid #ffffff26; 
   backdrop-filter: blur(8px);
 }
 .carousel-caption h3 { 
-  font-size: clamp(1.25rem, 3vw, 2rem); 
+  font-size: 20px; 
 }
 .carousel-caption p { 
   margin: 0; 
-  font-size: 0.95rem; 
+  font-size: 15px; 
 }
 
 /* MENU */
 .judul-seksi { 
   color: var(--kopi-gelap); 
   font-weight: 700; 
-  letter-spacing: -0.5px; 
+  letter-spacing: -1px; 
 }
 .kategori-menu { 
   display: flex; 
@@ -121,7 +122,7 @@ h1, h2, h3, .brand, .offcanvas-title {
   color: #6d5949; 
   padding: 10px 20px; 
   border-radius: 11px; 
-  font-size: 0.9rem; 
+  font-size: 14px; 
   font-weight: 600; 
   transition: 0.2s; 
 }
@@ -167,7 +168,7 @@ h1, h2, h3, .brand, .offcanvas-title {
   position: absolute; 
   left: 12px; 
   top: 12px; 
-  font-size: 0.72rem; 
+  font-size: 12px; 
 }
 .kartu-menu .card-body { 
   display: flex; 
@@ -176,14 +177,14 @@ h1, h2, h3, .brand, .offcanvas-title {
 }
 .kartu-menu .card-title { 
   color: var(--kopi-gelap); 
-  font-size: 1.05rem; 
+  font-size: 17px; 
   font-weight: 700; 
-  min-height: 2.8em; 
+  min-height: 48px; 
 }
 .kartu-menu .card-text {
   color: var(--teks-redup); 
-  font-size: 0.86rem; 
-  min-height: 4.8em;
+  font-size: 13px; 
+  min-height: 75px;
   display: -webkit-box; 
   -webkit-box-orient: vertical; 
   -webkit-line-clamp: 3; 
@@ -192,15 +193,15 @@ h1, h2, h3, .brand, .offcanvas-title {
 }
 .harga-menu { 
   color: var(--kopi-gelap); 
-  font-weight: 800; 
+  font-weight: 700; 
   white-space: nowrap; 
 }
 .btn-tambah {
-   background: var(--kopi-gelap); 
-   border-color: var(--kopi-gelap); 
-   border-radius: 9px; 
-   font-weight: 600; 
-  }
+  background: var(--kopi-gelap); 
+  border-color: var(--kopi-gelap); 
+  border-radius: 9px; 
+  font-weight: 600; 
+}
 .btn-tambah:hover { 
   background: var(--kopi-caramel); 
   border-color: var(--kopi-caramel); 
@@ -239,9 +240,8 @@ h1, h2, h3, .brand, .offcanvas-title {
   border-radius: 14px; 
   color: var(--kopi-sedang); 
 }
-.stat-angka { 
-  font-family: var(--font-judul), serif; 
-  font-size: 1.8rem; 
+.stat-angka {
+  font-size: 28px; 
   font-weight: 700; 
   color: var(--kopi-gelap); 
   line-height: 1.2; 
@@ -284,21 +284,22 @@ h1, h2, h3, .brand, .offcanvas-title {
 .footer-kopi { 
   background: var(--kopi-gelap); 
   color: #e1cfba; 
-  font-size: 0.9rem; 
+  font-size: 16px; 
 }
 
 @media (max-width: 575.98px) {
-  .intro { padding: 2.8rem 0; }
+  .intro { padding: 45px 0; }
   .carousel-caption { left: 5%; right: 5%; bottom: 6%; padding: 12px; }
-  .carousel-caption p { font-size: 0.8rem; }
+  .carousel-caption p { font-size: 13px; }
   .kategori-menu { width: 100%; gap: 4px; padding: 5px; }
-  .btn-kategori { flex: 1 1 auto; padding: 9px 12px; font-size: 0.8rem; }
+  .btn-kategori { flex: 1 1 auto; padding: 9px 12px; font-size: 13px; }
   .kartu-menu .card-body { padding: 13px; }
-  .kartu-menu .card-title { font-size: 0.94rem; }
-  .kartu-menu .card-text { font-size: 0.8rem; }
+  .kartu-menu .card-title { font-size: 15px; }
+  .kartu-menu .card-text { font-size: 13px; }
   .modal-gambar { height: 200px; }
   .bagian-info .tab-content { padding: 16px; }
   .footer-kopi { text-align: center; }
+  .gambar-hero { height: 240px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
