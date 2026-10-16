@@ -1,5 +1,8 @@
 "use client";
 
+import Stepper from "../components/stepper"; 
+import { rupiah, type Item, type Menu } from "../lib/helpers";
+
 import { FormEvent, useEffect, useState } from "react";
 import {
   Accordion,
@@ -42,23 +45,11 @@ import {
   Plus,
   StarFill,
   TelephoneFill,
-  Trash3,
 } from "react-bootstrap-icons";
 
 const NAMA = "Claudia Linetta Widjaja";
 const NIM = "535250098";
 const PAJAK = 0.1;
-
-type Menu = {
-  id: number;
-  nama: string;
-  kategori: "Kopi" | "Non-Kopi" | "Makanan";
-  harga: number;
-  gambar: string;
-  deskripsi: string;
-  label?: string;
-};
-type Item = { menu: Menu; qty: number };
 
 const daftarMenu: Menu[] = [
   {
@@ -240,7 +231,6 @@ const faq = [
   ["Metode pembayaran apa saja?", "QRIS, tunai, dan transfer bank."],
 ];
 
-const rupiah = (n: number) => `Rp ${n.toLocaleString("id-ID")}`;
 const formAwal = {
   nama: "",
   tipe: "Dine In",
@@ -335,20 +325,6 @@ export default function Home() {
     setBukaCheckout(false);
     setStruk(null);
   };
-
-  const Stepper = ({ menu, qty }: { menu: Menu; qty: number }) => (
-    <ButtonGroup size="sm" aria-label={`Jumlah ${menu.nama}`}>
-      <Button variant="outline-dark" onClick={() => ubah(menu, -1)}>
-        {qty === 1 ? <Trash3 /> : <Dash />}
-      </Button>
-      <Button variant="light" disabled className="fw-bold text-dark px-3">
-        {qty}
-      </Button>
-      <Button variant="outline-dark" onClick={() => ubah(menu, 1)}>
-        <Plus />
-      </Button>
-    </ButtonGroup>
-  );
 
   return (
     <>
@@ -509,7 +485,7 @@ export default function Home() {
                       <div className="mt-auto pt-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
                         <span className="harga-menu">{rupiah(item.harga)}</span>
                         {qty > 0 ? (
-                          <Stepper menu={item} qty={qty} />
+                          <Stepper menu={item} qty={qty} onUbah={ubah} />
                         ) : (
                           <Button
                             size="sm"
@@ -781,7 +757,7 @@ export default function Home() {
                       <div className="small text-secondary mb-1">
                         {rupiah(menu.harga)}
                       </div>
-                      <Stepper menu={menu} qty={qty} />
+                      <Stepper menu={menu} qty={qty} onUbah={ubah} />
                     </div>
                     <strong className="small">
                       {rupiah(menu.harga * qty)}
