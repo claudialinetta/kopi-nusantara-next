@@ -2,10 +2,10 @@
 
 import Stepper from "../components/stepper"; 
 import { rupiah, type Item, type Menu } from "../lib/helpers";
+import TentangKami from "../components/tentang";
 
 import { FormEvent, useEffect, useState } from "react";
 import {
-  Accordion,
   Alert,
   Badge,
   Button,
@@ -23,11 +23,7 @@ import {
   Navbar,
   Offcanvas,
   OverlayTrigger,
-  ProgressBar,
   Row,
-  Stack,
-  Tab,
-  Tabs,
   ToggleButton,
   Toast,
   ToastContainer,
@@ -37,13 +33,10 @@ import {
   BagCheckFill,
   Cart3,
   CheckCircleFill,
-  ClockFill,
-  CupHotFill,
   Dash,
   GeoAltFill,
   Instagram,
   Plus,
-  StarFill,
   TelephoneFill,
 } from "react-bootstrap-icons";
 
@@ -185,52 +178,6 @@ const slideHero = [
   },
 ];
 
-const jamBuka = [
-  { hari: "Senin - Jumat", jam: "08.00 - 22.00", idx: [1, 2, 3, 4, 5] },
-  { hari: "Sabtu - Minggu", jam: "09.00 - 23.00", idx: [0, 6] },
-];
-
-const statistik = [
-  { angka: "12+", ket: "Petani mitra" },
-  { angka: "13", ket: "Menu pilihan" },
-  { angka: "100%", ket: "Biji lokal" },
-];
-
-const rating = [
-  [5, 82],
-  [4, 12],
-  [3, 4],
-  [2, 1],
-  [1, 1],
-];
-
-const ulasan = [
-  {
-    nama: "Rina",
-    teks: "Gula arennya wangi banget, tempatnya juga adem buat nugas.",
-  },
-  {
-    nama: "Dimas",
-    teks: "Single origin Gayo-nya juara. Baristanya ramah dan bisa jelasin biji.",
-  },
-];
-
-const faq = [
-  [
-    "Bisa beli biji kopi untuk dibawa pulang?",
-    "Bisa. Tersedia kemasan 200 gram dan 1 kg, dan bisa digiling sesuai alat seduhmu.",
-  ],
-  [
-    "Bisa pesan antar?",
-    "Bisa lewat aplikasi ojek online atau chat langsung ke kami.",
-  ],
-  [
-    "Apakah ada menu tanpa kafein?",
-    "Ada. Pilih kategori Non-Kopi seperti Matcha Latte, Susu Cokelat, dan Lemon Tea.",
-  ],
-  ["Metode pembayaran apa saja?", "QRIS, tunai, dan transfer bank."],
-];
-
 const formAwal = {
   nama: "",
   tipe: "Dine In",
@@ -349,7 +296,7 @@ export default function Home() {
             <Nav className="ms-auto align-items-md-center">
               <Nav.Link href="#beranda">Beranda</Nav.Link>
               <Nav.Link href="#menu">Menu</Nav.Link>
-              <Nav.Link href="#info">Info</Nav.Link>
+              <Nav.Link href="#tentang">Tentang Kami</Nav.Link>
               <Button
                 variant="outline-warning"
                 className="ms-md-3 mt-2 mt-md-0"
@@ -505,148 +452,8 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* INFO */}
-      <section id="info" className="bagian-info py-5">
-        <Container>
-          <h2 className="judul-seksi text-center mb-4">Tentang Kami</h2>
-          <Row className="justify-content-center">
-            <Col lg={8}>
-              <Tabs
-                defaultActiveKey="tentang"
-                id="tab-info"
-                fill
-                className="mb-0"
-              >
-                <Tab eventKey="tentang" title="Tentang">
-                  <p>
-                    Kopi Nusantara berdiri dengan satu tujuan: mengenalkan kopi
-                    lokal Indonesia ke lebih banyak orang. Kami bekerja sama
-                    langsung dengan petani agar kualitas biji tetap terjaga.
-                  </p>
-                  <Row className="g-3 text-center">
-                    {statistik.map((s) => (
-                      <Col xs={4} key={s.ket}>
-                        <Card body className="stat-kartu">
-                          <CupHotFill className="mb-1" />
-                          <div className="stat-angka">{s.angka}</div>
-                          <small className="text-secondary">{s.ket}</small>
-                        </Card>
-                      </Col>
-                    ))}
-                  </Row>
-                </Tab>
-
-                <Tab eventKey="jam" title="Jam Buka">
-                  <ListGroup variant="flush">
-                    {jamBuka.map((j) => (
-                      <ListGroup.Item
-                        key={j.hari}
-                        className="d-flex justify-content-between align-items-center bg-transparent"
-                      >
-                        <span>
-                          <ClockFill className="me-2" />
-                          {j.hari}
-                        </span>
-                        <span>
-                          {j.idx.includes(hariIni) && (
-                            <Badge bg="success" className="me-2">
-                              Hari ini
-                            </Badge>
-                          )}
-                          <strong>{j.jam}</strong>
-                        </span>
-                      </ListGroup.Item>
-                    ))}
-                  </ListGroup>
-                </Tab>
-
-                <Tab eventKey="lokasi" title="Lokasi">
-                  <ListGroup variant="flush" className="mb-3">
-                    <ListGroup.Item className="bg-transparent">
-                      <GeoAltFill className="me-2" />
-                      Jl. Kopi No. 1
-                    </ListGroup.Item>
-                    <ListGroup.Item
-                      className="bg-transparent"
-                      action
-                      href="tel:081234567890"
-                    >
-                      <TelephoneFill className="me-2" />
-                      0812-3456-7890
-                    </ListGroup.Item>
-                    <ListGroup.Item className="bg-transparent">
-                      <Instagram className="me-2" />
-                      @kopinusantara
-                    </ListGroup.Item>
-                  </ListGroup>
-                  <Button
-                    variant="outline-dark"
-                    href="https://instagram.com"
-                    target="_blank"
-                  >
-                    Kunjungi Instagram
-                  </Button>
-                </Tab>
-
-                <Tab eventKey="ulasan" title="Ulasan">
-                  <Row className="g-4 align-items-center">
-                    <Col md={5} className="text-center">
-                      <div className="stat-angka">4.8</div>
-                      <div className="text-warning mb-1">
-                        {[...Array(5)].map((_, i) => (
-                          <StarFill key={i} />
-                        ))}
-                      </div>
-                      <small className="text-secondary">dari 120 ulasan</small>
-                    </Col>
-                    <Col md={7}>
-                      {rating.map(([bintang, persen]) => (
-                        <Stack
-                          direction="horizontal"
-                          gap={2}
-                          key={bintang}
-                          className="mb-1"
-                        >
-                          <small>{bintang}</small>
-                          <ProgressBar
-                            now={persen}
-                            variant="warning"
-                            className="flex-grow-1"
-                            style={{ height: 8 }}
-                          />
-                        </Stack>
-                      ))}
-                    </Col>
-                  </Row>
-                  <Row className="g-3 mt-2">
-                    {ulasan.map((u) => (
-                      <Col md={6} key={u.nama}>
-                        <Card body className="h-100 border-0 shadow-sm">
-                          <Card.Text className="small mb-2">
-                            “{u.teks}”
-                          </Card.Text>
-                          <strong className="small">{u.nama}</strong>
-                        </Card>
-                      </Col>
-                    ))}
-                  </Row>
-                </Tab>
-
-                <Tab eventKey="faq" title="FAQ">
-                  <Accordion defaultActiveKey="0" flush>
-                    {faq.map(([tanya, jawab], i) => (
-                      <Accordion.Item eventKey={`${i}`} key={tanya}>
-                        <Accordion.Header>{tanya}</Accordion.Header>
-                        <Accordion.Body>{jawab}</Accordion.Body>
-                      </Accordion.Item>
-                    ))}
-                  </Accordion>
-                </Tab>
-              </Tabs>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      {/* TENTANG KAMI */}
+      <TentangKami hariIni={hariIni} />
 
       {/* FOOTER */}
       <footer className="footer-kopi py-4">
