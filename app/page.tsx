@@ -3,6 +3,7 @@
 import Stepper from "../components/stepper"; 
 import { rupiah, type Item, type Menu } from "../lib/helpers";
 import TentangKami from "../components/tentang";
+import Keranjang from "../components/keranjang";
 
 import { FormEvent, useEffect, useState } from "react";
 import {
@@ -21,7 +22,6 @@ import {
   Modal,
   Nav,
   Navbar,
-  Offcanvas,
   OverlayTrigger,
   Row,
   ToggleButton,
@@ -201,6 +201,7 @@ export default function Home() {
     no: string;
     total: number;
     nama: string;
+    daftar: Item[];
   } | null>(null);
   const [toast, setToast] = useState("");
   const [promo, setPromo] = useState(true);
@@ -262,6 +263,7 @@ export default function Home() {
       no: `KN-${Math.floor(1000 + Math.random() * 9000)}`,
       total,
       nama: form.nama,
+      daftar: keranjang,
     });
     setKeranjang([]);
     setForm(formAwal);
@@ -532,86 +534,25 @@ export default function Home() {
       </Modal>
 
       {/* KERANJANG */}
-      <Offcanvas
+      <Keranjang
         show={bukaKeranjang}
         onHide={() => setBukaKeranjang(false)}
-        placement="end"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Pesanan Saya ({jumlahItem})</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="d-flex flex-column">
-          {keranjang.length === 0 ? (
-            <Alert variant="secondary">
-              Belum ada pesanan. Yuk pilih menu dulu!
-            </Alert>
-          ) : (
-            <>
-              <ListGroup variant="flush" className="flex-grow-1 overflow-auto">
-                {keranjang.map(({ menu, qty }) => (
-                  <ListGroup.Item
-                    key={menu.id}
-                    className="bg-transparent px-0 d-flex gap-3 align-items-center"
-                  >
-                    <Image
-                      src={menu.gambar}
-                      alt={menu.nama}
-                      rounded
-                      className="thumb"
-                    />
-                    <div className="flex-grow-1">
-                      <div className="fw-semibold small">{menu.nama}</div>
-                      <div className="small text-secondary mb-1">
-                        {rupiah(menu.harga)}
-                      </div>
-                      <Stepper menu={menu} qty={qty} onUbah={ubah} />
-                    </div>
-                    <strong className="small">
-                      {rupiah(menu.harga * qty)}
-                    </strong>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-
-              <div className="rincian small mt-3">
-                <div>
-                  <span>Subtotal</span>
-                  <span>{rupiah(subtotal)}</span>
-                </div>
-                {diskon > 0 && (
-                  <div className="text-success">
-                    <span>Promo gratis croissant</span>
-                    <span>-{rupiah(diskon)}</span>
-                  </div>
-                )}
-                <div>
-                  <span>Pajak 10%</span>
-                  <span>{rupiah(pajak)}</span>
-                </div>
-                <div className="fw-bold fs-6 pt-2 border-top">
-                  <span>Total</span>
-                  <span>{rupiah(total)}</span>
-                </div>
-              </div>
-
-              <div className="d-grid gap-2 mt-3">
-                <Button
-                  variant="success"
-                  onClick={() => {
-                    setBukaKeranjang(false);
-                    setBukaCheckout(true);
-                  }}
-                >
-                  Checkout
-                </Button>
-                <Button variant="outline-dark" onClick={() => setKeranjang([])}>
-                  Kosongkan
-                </Button>
-              </div>
-            </>
-          )}
-        </Offcanvas.Body>
-      </Offcanvas>
+        keranjang={keranjang}
+        jumlahItem={jumlahItem}
+        subtotal={subtotal}
+        diskon={diskon}
+        pajak={pajak}
+        total={total}
+        qtyGula={qtyDi(1)}
+        adaCroissant={qtyDi(5) > 0}
+        onUbah={ubah}
+        onKosongkan={() => setKeranjang([])}
+        onCheckout={() => {
+          setBukaKeranjang(false);
+          setBukaCheckout(true);
+        }}
+        onTambahCroissant={() => tambah(daftarMenu[4])}
+      />
 
       {/* CHECKOUT */}
       <Modal show={bukaCheckout} onHide={tutupCheckout} centered>
@@ -623,7 +564,20 @@ export default function Home() {
               Terima kasih, {struk.nama}. Nomor pesananmu:
             </p>
             <h3 className="mb-1">{struk.no}</h3>
-            <p className="mb-4">Total {rupiah(struk.total)}</p>
+            <ListGroup variant="flush" className="text-start small mb-3">
+              {struk.daftar.map(({ menu, qty }) => (
+                <ListGroup.Item
+                  key={menu.id}
+                  className="bg-transparent px-0 d-flex justify-content-between"
+                >
+                  <span>
+                    {qty}x {menu.nama}
+                  </span>
+                  <span>{rupiah(menu.harga * qty)}</span>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+            <p className="mb-4">Total bayar {rupiah(struk.total)}</p>
             <Button variant="warning" onClick={tutupCheckout}>
               Selesai
             </Button>
@@ -742,9 +696,25 @@ export default function Home() {
           </Form>
         )}
       </Modal>
+      
+      {jumlahItem > 0 && !bukaKeranjang && (
+        <Button
+          variant="warning"
+          className="fab-keranjang d-md-none"
+          onClick={() => setBukaKeranjang(true)}
+          aria-label="Buka pesanan"
+        >
+          <Cart3 size={20} className="me-2" />
+          {jumlahItem} item · {rupiah(total)}
+        </Button>
+      )}
 
       {/* TOAST */}
-      <ToastContainer position="bottom-end" className="p-3 position-fixed">
+      <ToastContainer
+        position="top-center"
+        className="p-3 position-fixed"
+        style={{ zIndex: 2000 }}
+      >
         <Toast
           show={!!toast}
           onClose={() => setToast("")}
