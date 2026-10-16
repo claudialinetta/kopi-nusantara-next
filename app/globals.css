@@ -344,6 +344,53 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 8px 24px #38231940;
 }
 
+/* FAQ */
+.faq .accordion-item {
+  background: var(--putih);
+  border-color: var(--border);
+}
+.faq .accordion-button:not(.collapsed) {
+  color: var(--kopi-gelap);
+  background: #f4e8d6;
+  box-shadow: none;
+}
+.faq .accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(185, 135, 82, 0.25);
+}
+
+/* KONTAK */
+.hitung-karakter {
+  font-size: 0.8rem;
+  text-align: right;
+  color: var(--teks-redup);
+}
+.kartu-info .form-control:focus {
+  border-color: var(--kopi-caramel);
+  box-shadow: 0 0 0 0.2rem #b9875240;
+}
+.daftar-kontak li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.daftar-kontak li:last-child {
+  border-bottom: 0;
+}
+.daftar-kontak svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--kopi-caramel);
+}
+.daftar-kontak a {
+  color: var(--teks);
+  text-decoration: none;
+}
+.daftar-kontak a:hover {
+  color: var(--kopi-caramel);
+}
+
 /* FOOTER */
 .footer-kopi { 
   background: var(--kopi-gelap); 

@@ -4,6 +4,8 @@ import Stepper from "../components/stepper";
 import { kontak, rupiah, type Item, type Menu } from "../lib/helpers";
 import TentangKami from "../components/tentang";
 import Keranjang from "../components/keranjang";
+import Faq from "../components/faq";
+import Kontak from "../components/kontak";
 
 import { FormEvent, useEffect, useState } from "react";
 import {
@@ -298,6 +300,7 @@ export default function Home() {
               <Nav.Link href="#beranda">Beranda</Nav.Link>
               <Nav.Link href="#menu">Menu</Nav.Link>
               <Nav.Link href="#tentang">Tentang Kami</Nav.Link>
+              <Nav.Link href="#kontak">Kontak</Nav.Link>
               <Button
                 variant="outline-warning"
                 className="ms-md-3 mt-2 mt-md-0"
@@ -455,6 +458,8 @@ export default function Home() {
 
       {/* TENTANG KAMI */}
       <TentangKami hariIni={hariIni} />
+      <Faq />
+      <Kontak />
 
       {/* FOOTER */}
       <footer className="footer-kopi py-4">
