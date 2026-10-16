@@ -207,6 +207,7 @@ export default function Home() {
   const [toast, setToast] = useState("");
   const [promo, setPromo] = useState(true);
   const [hariIni, setHariIni] = useState(-1);
+  const [aktif, setAktif] = useState("beranda");
 
   useEffect(() => {
     try {
@@ -217,10 +218,29 @@ export default function Home() {
     setHariIni(new Date().getDay());
     setSiap(true);
   }, []);
+
   useEffect(() => {
     if (siap) localStorage.setItem("keranjang-kopi", JSON.stringify(keranjang));
   }, [keranjang, siap]);
 
+  useEffect(() => {
+    const idBagian = ["beranda", "menu", "tentang", "info", "faq", "kontak"];
+    const cek = () => {
+      let sekarang = idBagian[0];
+      for (const id of idBagian) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) sekarang = id;
+      }
+      // kalau sudah mentok di bawah, anggap sedang di Kontak
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+        sekarang = "kontak";
+      }
+      setAktif(sekarang === "info" || sekarang === "faq" ? "tentang" : sekarang);
+    };
+    window.addEventListener("scroll", cek, { passive: true });
+    return () => window.removeEventListener("scroll", cek);
+  }, []);
+  
   const menuTampil =
     kategori === "Semua"
       ? daftarMenu
@@ -297,10 +317,10 @@ export default function Home() {
           <Navbar.Toggle aria-controls="menu-navbar" />
           <Navbar.Collapse id="menu-navbar">
             <Nav className="ms-auto align-items-md-center">
-              <Nav.Link href="#beranda">Beranda</Nav.Link>
-              <Nav.Link href="#menu">Menu</Nav.Link>
-              <Nav.Link href="#tentang">Tentang Kami</Nav.Link>
-              <Nav.Link href="#kontak">Kontak</Nav.Link>
+              <Nav.Link href="#beranda" active={aktif === "beranda"}>Beranda</Nav.Link>
+              <Nav.Link href="#menu" active={aktif === "menu"}>Menu</Nav.Link>
+              <Nav.Link href="#tentang" active={aktif === "tentang"}>Tentang Kami</Nav.Link>
+              <Nav.Link href="#kontak" active={aktif === "kontak"}>Kontak</Nav.Link>
               <Button
                 variant="outline-warning"
                 className="ms-md-3 mt-2 mt-md-0"

@@ -39,8 +39,16 @@ h1, h2, h3, h4, h5 {
   color: #ead9c6 !important; 
   margin: 0 6px; 
 }
-.navbar-kopi .nav-link:hover { 
-  color: var(--emas) !important; 
+.navbar-kopi .nav-link {
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+.navbar-kopi .nav-link:hover {
+  color: var(--kopi-caramel) !important;
+  font-weight: 600;
+}
+.navbar-kopi .nav-link.active {
+  color: var(--emas) !important;
+  font-weight: 700;
 }
 .navbar-kopi .navbar-toggler { 
   border-color: #ffffff59; 
