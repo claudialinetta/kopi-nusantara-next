@@ -2,14 +2,13 @@
 
 import { Badge, Button, Col, Container, Image, Row } from "react-bootstrap";
 import { BagCheckFill, ClockFill, GeoAltFill } from "react-bootstrap-icons";
-import { kontak } from "../lib/helpers";
 
 const jamBuka = [
   { hari: "Senin - Jumat", jam: "08.00 - 22.00", idx: [1, 2, 3, 4, 5] },
   { hari: "Sabtu - Minggu", jam: "09.00 - 23.00", idx: [0, 6] },
 ];
 
-const linkMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(kontak.alamat)}`;
+const linkMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Jl. Letjen S. Parman, Jakarta Barat")}`;
 
 export default function TentangKami({ hariIni }: { hariIni: number }) {
   return (
@@ -93,7 +92,7 @@ export default function TentangKami({ hariIni }: { hariIni: number }) {
                   <GeoAltFill />
                 </div>
                 <h3>Lokasi</h3>
-                <p className="text-secondary">{kontak.alamat}</p>
+                <p className="text-secondary">Jl. Letjen S. Parman, Jakarta Barat</p>
                 <Button
                   variant="outline-dark"
                   size="sm"

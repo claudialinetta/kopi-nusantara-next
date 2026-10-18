@@ -1,9 +1,21 @@
 "use client";
 
-import { Alert, Button, Image, ListGroup, Offcanvas } from "react-bootstrap";
-import { Cart3, Gift } from "react-bootstrap-icons";
-import Stepper from "../components/stepper";
-import { rupiah, type Item, type Menu } from "@/lib/helpers";
+import { Alert, Button, ButtonGroup, Image, ListGroup, Offcanvas } from "react-bootstrap";
+import { Cart3, Dash, Gift, Plus, Trash3 } from "react-bootstrap-icons";
+
+export type Menu = {
+  id: number;
+  nama: string;
+  kategori: "Kopi" | "Non-Kopi" | "Makanan";
+  harga: number;
+  gambar: string;
+  deskripsi: string;
+  label?: string;
+};
+
+export type Item = { menu: Menu; qty: number };
+
+const rupiah = (n: number) => `Rp ${n.toLocaleString("id-ID")}`;
 
 type Props = {
   show: boolean;
@@ -98,7 +110,17 @@ export default function Keranjang({
                     <div className="small text-secondary mb-1">
                       {rupiah(menu.harga)}
                     </div>
-                    <Stepper menu={menu} qty={qty} onUbah={onUbah} />
+                    <ButtonGroup size="sm" aria-label={`Jumlah ${menu.nama}`}>
+                      <Button variant="outline-dark" onClick={() => onUbah(menu, -1)}>
+                        {qty === 1 ? <Trash3 /> : <Dash />}
+                      </Button>
+                      <Button variant="light" disabled className="fw-bold text-dark px-3">
+                        {qty}
+                      </Button>
+                      <Button variant="outline-dark" onClick={() => onUbah(menu, 1)}>
+                        <Plus />
+                      </Button>
+                    </ButtonGroup>
                   </div>
                   <strong className="small">{rupiah(menu.harga * qty)}</strong>
                 </ListGroup.Item>

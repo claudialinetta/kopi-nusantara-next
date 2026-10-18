@@ -1,9 +1,7 @@
 "use client";
 
-import Stepper from "../components/stepper"; 
-import { kontak, rupiah, type Item, type Menu } from "../lib/helpers";
 import TentangKami from "../components/tentang";
-import Keranjang from "../components/keranjang";
+import Keranjang, { type Item, type Menu } from "../components/keranjang";
 import Faq from "../components/faq";
 import Kontak from "../components/kontak";
 
@@ -39,11 +37,13 @@ import {
   GeoAltFill,
   Plus,
   TelephoneFill,
+  Trash3,
 } from "react-bootstrap-icons";
 
 const NAMA = "Claudia Linetta Widjaja";
 const NIM = "535250098";
 const PAJAK = 0.1;
+const rupiah = (n: number) => `Rp ${n.toLocaleString("id-ID")}`;
 
 const daftarMenu: Menu[] = [
   {
@@ -456,7 +456,17 @@ export default function Home() {
                       <div className="mt-auto pt-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
                         <span className="harga-menu">{rupiah(item.harga)}</span>
                         {qty > 0 ? (
-                          <Stepper menu={item} qty={qty} onUbah={ubah} />
+                          <ButtonGroup size="sm" aria-label={`Jumlah ${item.nama}`}>
+                            <Button variant="outline-dark" onClick={() => ubah(item, -1)}>
+                              {qty === 1 ? <Trash3 /> : <Dash />}
+                            </Button>
+                            <Button variant="light" disabled className="fw-bold text-dark px-3">
+                              {qty}
+                            </Button>
+                            <Button variant="outline-dark" onClick={() => ubah(item, 1)}>
+                              <Plus />
+                            </Button>
+                          </ButtonGroup>
                         ) : (
                           <Button
                             size="sm"
@@ -488,8 +498,8 @@ export default function Home() {
             © 2026 Kopi Nusantara · {NAMA} ({NIM})
           </span>
           <span>
-          <GeoAltFill className="me-1" /> {kontak.alamat}
-          <TelephoneFill className="ms-3 me-1" /> {kontak.wa}
+          <GeoAltFill className="me-1" /> Jl. Letjen S. Parman, Jakarta Barat
+          <TelephoneFill className="ms-3 me-1" /> 0812-3456-7890
         </span>
         </Container>
       </footer>

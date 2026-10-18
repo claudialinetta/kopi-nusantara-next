@@ -9,9 +9,9 @@ import {
   Container,
   Form,
   Row,
+  Image,
 } from "react-bootstrap";
 import { EnvelopeFill, GeoAltFill, Whatsapp } from "react-bootstrap-icons";
-import { kontak } from "../lib/helpers";
 
 const BATAS = 999;
 const formKosong = { nama: "", email: "", keperluan: "" };
@@ -120,19 +120,26 @@ export default function Kontak() {
               <ul className="daftar-kontak list-unstyled mb-0">
                 <li>
                   <Whatsapp />
-                  <a href={kontak.waLink} target="_blank" rel="noreferrer">
-                    {kontak.wa}
+                  <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer">
+                    0812-3456-7890
                   </a>
                 </li>
                 <li>
                   <EnvelopeFill />
-                  <a href={`mailto:${kontak.email}`}>{kontak.email}</a>
+                  <a href="mailto:kopi_nusantara@gmail.com">kopi_nusantara@gmail.com</a>
                 </li>
                 <li>
                   <GeoAltFill />
-                  <span>{kontak.alamat}</span>
+                  <span>Jl. Letjen S. Parman, Jakarta Barat</span>
                 </li>
               </ul>
+              <Image
+                src="/kontak.png"
+                alt="Kopi Nusantara"
+                fluid
+                rounded
+                className="mt-3 w-100"
+              />
             </div>
           </Col>
         </Row>
